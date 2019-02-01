@@ -8,14 +8,37 @@
   <body>
         <h1 id="title">Todo tracker</h1>
         <form>
-            <input type="text" id="user-todo" placeholder="New Todo">
+            <input type="text" id="user-todo" placeholder="New Todo" required>
         </form>
         <h2 id="todo-header">Todos</h2>
         <ul>
-            <li class="todos">List item 1</li>
-            <li class="todos">List item 2</li>
-            <li class="todos">List item 3</li>    
+               
         </ul>
         <button id="clear">Clear All</button>
+
+        <script>
+            var form = document.querySelector('form');
+            var todosList = document.querySelector('ul');
+            var button = document.getElementById('clear');
+            var input = document.getElementById('user-todo');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                todoMaker(input.value);
+                input.value = "";
+            });
+
+            var todoMaker = function(text) {
+                let todoElement = document.createElement('li');
+                todoElement.textContent = text;
+                todosList.appendChild(todoElement);
+            }
+
+            button.addEventListener('click', function removeElements() {
+                while(todosList.firstChild) {
+                    todosList.removeChild(todosList.firstChild);
+                }
+            });
+        </script>
   </body>
 </html>
